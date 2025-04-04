@@ -1,0 +1,260 @@
+/* General */
+body {
+  font-family: 'Georgia', serif;
+  background: #f9f3e6 url("/images/textura-pergamino.jpg") repeat;
+  margin: 0;
+  padding: 0;
+  color: #3a2d1d;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2em;
+  color: #5a372b;
+}
+
+.music-control {
+  margin-top: 10px;
+}
+
+.music-btn {
+  background: none;
+  border: 2px solid #5a372b;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #5a372b;
+}
+
+.music-btn:hover {
+  background: #5a372b;
+  color: #fff;
+}
+
+/* Carousel */
+.carousel {
+  position: relative;
+  max-width: 100%;
+  margin: 20px auto;
+  overflow: hidden;
+}
+
+.slide {
+  display: none;
+  text-align: center;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.slide.active {
+  display: block;
+}
+
+.slide img {
+  width: 100%;
+  max-height: 350px;
+  object-fit: cover;
+  border: 3px solid #8b5e3c;
+  border-radius: 10px;
+}
+
+.carousel-info {
+  background: rgba(255, 255, 255, 0.85);
+  margin-top: 5px;
+  padding: 10px;
+  font-style: italic;
+  border-radius: 5px;
+  border-left: 4px solid #8b5e3c;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #8b5e3c;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.prev-slide {
+  left: 10px;
+}
+
+.next-slide {
+  right: 10px;
+}
+
+/* Progress */
+.progress-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.progress-bar {
+  background: #ddd;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #8b5e3c;
+  width: 0%;
+  transition: width 0.5s ease-in-out;
+}
+
+/* Botones */
+.button-group,
+.buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.action-btn, .map-btn {
+  background: #5a372b;
+  color: white;
+  border: 2px solid #c9a26b;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.action-btn:hover, .map-btn:hover {
+  background: #7e4f3a;
+}
+
+.map-btn.locked {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Inputs */
+input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #8b5e3c;
+  border-radius: 5px;
+  width: 250px;
+  margin: 10px 0;
+}
+
+/* Indicadores */
+.stop-icon {
+  font-size: 36px;
+  margin: 20px 0;
+}
+
+.arrow-icon {
+  width: 40px;
+  height: auto;
+  margin-top: 10px;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+}
+
+/* Pistas y info */
+.pista, .info, .fragmento-final {
+  background: #fffaf0;
+  padding: 10px 15px;
+  border-left: 5px solid #8b5e3c;
+  margin: 20px 0;
+  border-radius: 6px;
+  font-style: italic;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+footer a {
+  color: #5a372b;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .buttons-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .action-btn, .map-btn {
+    width: 90%;
+  }
+
+  .slide img {
+    max-height: 240px;
+  }
+  .pergamino {
+  display: none;
+  transition: all 0.5s ease;
+  margin-top: 10px;
+  }
+  .pergamino.visible {
+  display: block;
+  }
+
+  .simbolo {
+  display: inline-block;
+  font-size: 36px;
+  padding: 10px;
+  border: 2px solid #8b5e3c;
+  border-radius: 10px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.simbolo.activo {
+  background-color: #ffe9b5;
+}  
+
+@media screen and (max-width: 600px) {
+  .buttons-container.redes .action-btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+    margin: 0.2rem;
+  }
+
+  .buttons-container a img {
+    height: 20px;
+    margin-right: 4px;
+  }
+
+  .buttons-container:not(.redes) .action-btn {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+  }
+}
+
+
