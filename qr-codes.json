@@ -1,0 +1,52 @@
+{
+  "códigos": [
+    {
+      "código": "CASTILLO-1834",
+      "destino": "castillo"
+    },
+    {
+      "código": "PLAZA-1523",
+      "destino": "plaza"
+    },
+    {
+      "código": "IGLESIA-1300",
+      "destino": "iglesia"
+    },
+    {
+      "código": "FUENTE-1600",
+      "destino": "fuente"
+    },
+    {
+      "código": "ERMITA-1500",
+      "destino": "ermita"
+    },
+    {
+      "código": "PUENTE-1400",
+      "destino": "puente"
+    },
+     {
+      "código": "BODEGA-1600",
+      "destino": "bodega"
+    },
+    {
+      "código": "HUMILLADERO-1512",
+      "destino": "humilladero"
+    },
+    {
+      "código": "TABLAS-001",
+      "destino": "puente-tablas"
+    },
+    {
+      "código": "ARCO-1420",
+      "destino": "arco"
+    },
+    {
+      "código": "CALLEJON-1444",
+      "destino": "callejon"
+    },
+    {
+      "código": "ESCORTINAS-1555",
+      "destino": "escortinas"
+    }
+  ]
+}
