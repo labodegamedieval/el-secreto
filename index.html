@@ -1,71 +1,149 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Búsqueda de Gonzalo</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌟 Comienza tu aventura</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="images/escudo-borrado.jpg" />
+    <style>
+        .mapa-preview {
+            width: 100%;
+            max-width: 400px;
+            border: 3px solid #8b5e3c;
+            border-radius: 10px;
+            cursor: zoom-in;
+            margin: 20px auto;
+            display: block;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+        }
+        .modal img {
+            display: block;
+            margin: 40px auto;
+            max-width: 90%;
+            max-height: 80vh;
+            border: 5px solid white;
+            border-radius: 12px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>La Búsqueda de Gonzalo</h1>
-        <p>Una aventura medieval interactiva en San Martín del Castañar</p>
-    </header>
+    <div class="container">
+        <header>
+            <h1>🧙‍♂️ ¡Bienvenido a la Aventura Medieval!</h1>
+        </header>
 
-    <main>
-        <section id="inicio">
-            <h2>¡Bienvenido, aventurero!</h2>
-            <p>Prepárate para descubrir los secretos de San Martín del Castañar.</p>
-            <button id="iniciarJuego">Iniciar Aventura</button>
-        </section>
+        <section>
+            <p>
+                Entra en el misterioso pueblo de San Martín del Castañar, donde un mensaje secreto de Gonzalo espera ser descubierto.
+                Cada decisión que tomes cambia el rumbo de la historia. ¿Estás preparad@ para el desafío?
+            </p>
 
-        <section id="mapa" style="display: none;">
-            <h2>Mapa del Pueblo</h2>
-            <img src="img/mapa.jpg" alt="Mapa de San Martín del Castañar">
-            <p>Sigue las pistas y encuentra los códigos QR.</p>
-        </section>
+            <h2>🎮 ¿Cómo se juega?</h2>
+            <ul>
+                <li>🔓 El juego es <strong>gratuito</strong> y no necesitas instalar nada.</li>
+                <li>📍 Activa el <strong>GPS</strong> para validar tu ubicación o escribe el nombre de la parada si prefieres hacerlo manual.</li>
+                <li>🔍 En cada parada, deberás superar un reto visual y un quiz histórico. Si aciertas a la primera... ¡suma puntos!</li>
+                <li>🧩 Al final de cada parada, conseguirás un fragmento del mensaje oculto.</li>
+                <li>🔀 Se te presentarán <strong>2 caminos a elegir</strong>. Tu decisión influirá en lo que descubres después.</li>
+                <li>🕵️ Busca QR secretos ocultos... ¡algunos solo se encuentran si prestas atención!</li>
+            </ul>
 
-        <section id="reto" style="display: none;">
-            <h2>Reto</h2>
-            <div id="contenidoReto">
-                </div>
-            <button id="continuarAventura">Continuar</button>
-        </section>
+            <h2>🧑‍🤝 ¿Juegas sol@ o en equipo?</h2>
+            <form onsubmit="iniciarAventura(event)">
+                <label>
+                    <input type="radio" name="modo" value="jugador" checked /> Soy un aventurer@ solitari@
+                </label><br>
+                <label>
+                    <input type="radio" name="modo" value="equipo" /> Jugamos en equipo
+                </label><br><br>
+                <input type="text" id="nombre" placeholder="Nombre del aventurer@ o equipo" required />
+                <br><br>
+                <button class="action-btn" type="submit">🚀 Comenzar aventura</button>
+            </form>
 
-        <section id="narrativa" style="display: none;">
-            <h2>Elige tu camino</h2>
-            <p id="textoNarrativa">Aquí se mostrará la narrativa.</p>
-            <div id="opcionesNarrativa">
-                </div>
-        </section>
+            <h2>🗺️ Callejero del juego</h2>
+            <p>Consulta el mapa del pueblo para orientarte mejor. Haz clic para verlo en grande:</p>
+            <img src="images/callejero.jpg" alt="Callejero del pueblo" class="mapa-preview" onclick="abrirMapa()" />
 
-        <section id="exposiciones" style="display: none;">
-            <h2>Exposiciones Locales</h2>
-            <div id="exposicionPlantas">
-                <h3>Plantas Medicinales</h3>
-                <p>Descubre los secretos de las plantas locales y sus usos curativos.</p>
-                <div id="contenidoPlantas">
-                    </div>
+            <div class="modal" id="modal-mapa" onclick="cerrarMapa()">
+                <img src="images/callejero.jpg" alt="Callejero ampliado" />
             </div>
-            <div id="exposicionBordado">
-                <h3>Símbolos del Bordado Serrano</h3>
-                <p>Aprende sobre la tradición del bordado y las expresiones locales.</p>
-                <div id="contenidoBordado">
-                    </div>
-            </div>
-            <button id="continuarExposiciones">Continuar</button>
+
+            <h2>🏌️ Clasificación</h2>
+            <p>Total de participantes: <span id="total-jugadores">0</span></p>
+            <table class="ranking-table" id="ranking">
+                <thead>
+                    <tr><th>#</th><th>Nombre</th><th>Tiempo</th><th>Aciertos</th></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </section>
 
-        <section id="final" style="display: none;">
-            <h2>¡Felicidades!</h2>
-            <p>Has completado la búsqueda. ¡Visita la Bodega Medieval para el último secreto!</p>
-        </section>
-    </main>
+        <footer>
+            <p>© 2025 La Bodega Medieval | <a href="https://www.labodegamedieval.es" target="_blank">Visita nuestra bodega</a></p>
+        </footer>
+    </div>
 
-    <footer>
-        <p>Creado por <a href="https://www.labodegamedieval.es/reservar/">La Bodega Medieval</a></p>
-    </footer>
+    <script>
+        function iniciarAventura(e) {
+            e.preventDefault();
+            const nombre = document.getElementById("nombre").value.trim();
+            const modo = document.querySelector("input[name='modo']:checked").value;
 
-    <script src="js/script.js"></script>
+            if (nombre) {
+                localStorage.setItem("jugador", nombre);
+                localStorage.setItem("modo", modo);
+                localStorage.setItem("inicio_juego", Date.now()); // nuevo campo de inicio general
+                localStorage.setItem("aciertos_totales", 0); // resetear aciertos totales
+                localStorage.removeItem("tiempo_castillo"); // Asegurarse de que el tiempo del castillo se inicie en la página del castillo
+                localStorage.removeItem("aciertos_castillo"); // Asegurarse de que los aciertos del castillo se reinicien
+                localStorage.setItem('parada_actual', 'castillo');
+                localStorage.setItem('parada_castillo_desbloqueada', 'false'); // Asegurarse que la parada empiece bloqueada
+                localStorage.removeItem('reto_simbolos_completado'); // Reiniciar el estado del reto de símbolos
+                window.location.href = "castillo.html";
+            }
+        }
+
+        function abrirMapa() {
+            document.getElementById("modal-mapa").style.display = "block";
+        }
+
+        function cerrarMapa() {
+            document.getElementById("modal-mapa").style.display = "none";
+        }
+
+        function formatearTiempo(segundos) {
+            const min = Math.floor(segundos / 60);
+            const seg = segundos % 60;
+            return `${min}:${seg.toString().padStart(2, '0')}`;
+        }
+
+        function actualizarRanking() {
+            const tabla = document.querySelector("#ranking tbody");
+            const totalSpan = document.getElementById("total-jugadores");
+            let datos = JSON.parse(localStorage.getItem("ranking") || "[]");
+
+            datos.sort((a,b) => a.tiempo - b.tiempo || b.aciertos - a.aciertos);
+            totalSpan.textContent = datos.length;
+            tabla.innerHTML = "";
+
+            datos.slice(0,10).forEach((jugador, index) => {
+                const fila = `<tr><td>${index + 1}</td><td>${jugador.nombre}</td><td>${formatearTiempo(jugador.tiempo)}</td><td>${jugador.aciertos}</td></tr>`;
+                tabla.innerHTML += fila;
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", actualizarRanking);
+    </script>
 </body>
 </html>
