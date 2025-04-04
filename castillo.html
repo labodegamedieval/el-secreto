@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🏰 Castillo de Gonzalo</title>
+    <link rel="stylesheet" href="style-castillo.css" />
+    <link rel="icon" href="images/escudo-borrado.jpg" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏰 Castillo de Gonzalo</h1>
+            <div class="music-control">
+                <button class="music-btn" onclick="toggleMusic()"><span class="music-icon">🎵</span> Pausar Música</button>
+            </div>
+        </header>
+
+        <section id="content">
+            <div class="stop-icon">🏰</div>
+
+            <div id="location-check">
+                <h2>Verifica tu ubicación</h2>
+                <p>Acércate a la torre del castillo para comenzar tu búsqueda.</p>
+                <button class="action-btn" onclick="checkLocation()">Verificar GPS</button>
+                <p>O escribe el nombre de la parada:</p>
+                <input type="text" id="location-input" placeholder="Ej: castillo" />
+                <button class="action-btn" onclick="checkLocationManual()">Verificar Manual</button>
+                <p id="location-status"></p>
+                <img id="direction-arrow" src="images/flecha.png" class="arrow-icon" style="display: none;">
+            </div>
+
+            <div id="game-content" style="display: none;">
+                <div class="carousel">
+                    <div class="slide active">
+                        <img src="images/castillo-entrada.jpg" alt="Entrada del Castillo" />
+                        <p class="carousel-info">
+                            <strong>Entrada:</strong> Puerta del siglo XV sobre fortificación anterior del siglo XIII. Hoy sede del Centro de Interpretación de la Biosfera.
+                            <a href="https://www.miteco.gob.es/content/dam/miteco/es/parques-nacionales-oapn/reservas-biosfera/programa-mab-espana/ListRB_Sierras_de_Bejar_y_Francia_tcm30-280293.pdf" target="_blank">Más info</a>
+                        </p>
+                    </div>
+                    <div class="slide">
+                        <img src="images/castillo-torre.jpg" alt="Torre del Homenaje" />
+                        <p class="carousel-info">
+                            <strong>Torre:</strong> El rayo destruyó la última torre en pie en el siglo XX. Hoy quedan dos lienzos de muralla con restos de almenas.
+                            <a href="https://sanmartindelcastanar.es/castillo-de-la-biosfera/" target="_blank">Más info</a>
+                        </p>
+                    </div>
+                    <div class="slide">
+                        <img src="images/castillo-vista.jpg" alt="Vistas desde el castillo" />
+                        <p class="carousel-info">
+                            <strong>Vista:</strong> Mirador natural sobre el valle. Desde 1834 es cementerio municipal.
+                            <a href="https://turismosierradefrancia.es/cultura/centros-interpretacion-museos/centro-de-interpretacion-reserva-de-la-biosfera-de-las-sierras-de-bejar-y-francia/" target="_blank">Más info</a>
+                        </p>
+                    </div>
+                    <button class="carousel-btn prev-slide">&larr;</button>
+                    <button class="carousel-btn next-slide">&rarr;</button>
+                </div>
+
+                <div class="visual-challenge">
+                    <h2>Reto Visual</h2>
+                    <p>¿Qué destruyó la última torre en pie?</p>
+                    <div id="visual-opciones-1">
+                        <button class="action-btn" onclick="checkVisualAnswer('Rayo', 'Rayo', 1)">Rayo</button>
+                        <button class="action-btn" onclick="checkVisualAnswer('Incendio', 'Rayo', 1)">Incendio</button>
+                        <button class="action-btn" onclick="checkVisualAnswer('Terremoto', 'Rayo', 1)">Terremoto</button>
+                    </div>
+                    <p id="visual-resultado-1"></p>
+                </div>
+
+                <div class="quiz">
+                    <h2>Quiz Histórico</h2>
+                    <p>¿En qué siglo se construyó la fortificación original?</p>
+                    <div id="quiz-opciones-1">
+                        <button class="action-btn" onclick="checkAnswer('XIII', 'XIII', 1)">XIII</button>
+                        <button class="action-btn" onclick="checkAnswer('XIV', 'XIII', 1)">XIV</button>
+                        <button class="action-btn" onclick="checkAnswer('XII', 'XIII', 1)">XII</button>
+                    </div>
+                    <p id="quiz-resultado-1"></p>
+
+                    <p>¿Qué función tuvo el castillo desde el siglo XIX?</p>
+                    <div id="quiz-opciones-2">
+                        <button class="action-btn" onclick="checkAnswer('Cementerio', 'Cementerio', 2)">Cementerio</button>
+                        <button class="action-btn" onclick="checkAnswer('Posada', 'Cementerio', 2)">Posada</button>
+                        <button class="action-btn" onclick="checkAnswer('Ayuntamiento', 'Cementerio', 2)">Ayuntamiento</button>
+                    </div>
+                    <p id="quiz-resultado-2"></p>
+
+                    <p>¿Qué se instaló en el castillo en el siglo XXI?</p>
+                    <div id="quiz-opciones-3">
+                        <button class="action-btn" onclick="checkAnswer('Centro de Interpretación', 'Centro de Interpretación', 3)">Centro de Interpretación</button>
+                        <button class="action-btn" onclick="checkAnswer('Museo de armas', 'Centro de Interpretación', 3)">Museo de armas</button>
+                        <button class="action-btn" onclick="checkAnswer('Parador', 'Centro de Interpretación', 3)">Parador</button>
+                    </div>
+                    <p id="quiz-resultado-3"></p>
+                </div>
+
+                <div class="pista">
+                    <strong>QR oculto:</strong> Se rumorea que Gonzalo grabó un símbolo detrás de una piedra suelta junto al arco. Si lo encuentras... escanea.
+                </div>
+
+                <div class="pista-audio">
+                    <h3>📜 Nota de Gonzalo</h3>
+                    <p><em>"Escudo… Espada… Luz… Cruz…"</em></p>
+                    <p>Escucha con atención... puede que el orden no sea el que imaginas.</p>
+                    <button class="action-btn" onclick="mostrarRetoYReproducir()">▶️ Reproducir Pista de Gonzalo</button>
+                </div>
+
+                <div class="reto-final">
+                    <h2>🕵️‍♀️ Reto Final: Los 12 Símbolos</h2>
+                    <p>Solo quienes recuerden bien las palabras de Gonzalo podrán desvelar el enigma final.</p>
+                    <button class="action-btn" onclick="window.location.href='castillo-simbolos.html'">
+                        🧠 Jugar al Reto de los 12 Símbolos
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <audio id="success-sound" src="sounds/success.mp3" preload="auto"></audio>
+        <audio id="error-sound" src="sounds/error.mp3" preload="auto"></audio>
+        <audio id="coins-sound" src="sounds/coins.mp3" preload="auto"></audio>
+        <audio id="cheers-sound" src="sounds/cheers.mp3" preload="auto"></audio>
+        <audio id="background-music" src="sounds/musica-medieval.mp3" preload="auto" loop></audio>
+        <audio id="voz-gonzalo" src="sounds/secuencia_gonzalo.mp3" preload="auto"></audio>
+
+        <footer>
+            <p>© 2025 La Bodega Medieval | <a href="https://www.labodegamedieval.es" target="_blank">Reserva tu visita</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="script-castillo.js"></script>
+</body>
+</html>
