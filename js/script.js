@@ -13,12 +13,6 @@ const game = {
         arco: { lat: 40.5218, lng: -6.063 },
         callejon: { lat: 40.5219, lng: -6.0633 },
         escortinas: { lat: 40.5236, lng: -6.0649 }
-    },
-    qrCodes: {
-        "CASTILLO-1834": "castillo", "PLAZA-1523": "plaza", "IGLESIA-1300": "iglesia",
-        "FUENTE-1600": "fuente", "ERMITA-1500": "ermita", "PUENTE-1400": "puente",
-        "BODEGA-1600": "bodega", "HUMILLADERO-1512": "humilladero", "TABLAS-001": "puente-tablas",
-        "ARCO-1420": "arco", "CALLEJON-1444": "callejon", "ESCORTINAS-1555": "escortinas"
     }
 };
 
@@ -53,7 +47,7 @@ window.checkLocation = function () {
                 setStatus("✅ Ubicación verificada.");
                 unlockContent();
             } else {
-                setStatus(` Estás a ${Math.round(distancia)} m del lugar. Acércate. (Precisión: ${precision} m)`);
+                setStatus(`Estás a ${Math.round(distancia)} m del lugar. Acércate. (Precisión: ${precision} m)`);
             }
         },
         (error) => {
@@ -78,13 +72,25 @@ window.checkQR = function () {
     const status = document.getElementById("qr-status");
     const valor = input.value.trim().toUpperCase();
 
-    if (game.qrCodes[valor]) {
-        status.textContent = "✅ QR correcto. Parada desbloqueada.";
-        localStorage.setItem(`${game.qrCodes[valor]}-discovered`, "true");
-        setTimeout(() => window.location.href = game.qrCodes[valor] + ".html", 1500);
-    } else {
-        status.textContent = "❌ Código incorrecto.";
-    }
+    fetch("qr-codes.json")
+        .then((response) => response.json())
+        .then((data) => {
+            const qrCodes = {};
+            data.códigos.forEach((código) => {
+                qrCodes[código.código] = código.destino;
+            });
+
+            if (qrCodes[valor]) {
+                status.textContent = "✅ QR correcto. Parada desbloqueada.";
+                localStorage.setItem(`${qrCodes[valor]}-discovered`, "true");
+                setTimeout(() => window.location.href = qrCodes[valor] + ".html", 1500);
+            } else {
+                status.textContent = "❌ Código incorrecto.";
+            }
+        })
+        .catch(() => {
+            status.textContent = "⚠️ Error al cargar los códigos QR.";
+        });
 };
 
 window.showHint = function (msg) {
