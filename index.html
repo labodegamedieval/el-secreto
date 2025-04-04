@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Búsqueda de Gonzalo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>La Búsqueda de Gonzalo</h1>
+        <p>Una aventura medieval interactiva en San Martín del Castañar</p>
+    </header>
+
+    <main>
+        <section id="inicio">
+            <h2>¡Bienvenido, aventurero!</h2>
+            <p>Prepárate para descubrir los secretos de San Martín del Castañar.</p>
+            <button id="iniciarJuego">Iniciar Aventura</button>
+        </section>
+
+        <section id="mapa" style="display: none;">
+            <h2>Mapa del Pueblo</h2>
+            <img src="img/mapa.jpg" alt="Mapa de San Martín del Castañar">
+            <p>Sigue las pistas y encuentra los códigos QR.</p>
+        </section>
+
+        <section id="reto" style="display: none;">
+            <h2>Reto</h2>
+            <div id="contenidoReto">
+                </div>
+            <button id="continuarAventura">Continuar</button>
+        </section>
+
+        <section id="narrativa" style="display: none;">
+            <h2>Elige tu camino</h2>
+            <p id="textoNarrativa">Aquí se mostrará la narrativa.</p>
+            <div id="opcionesNarrativa">
+                </div>
+        </section>
+
+        <section id="exposiciones" style="display: none;">
+            <h2>Exposiciones Locales</h2>
+            <div id="exposicionPlantas">
+                <h3>Plantas Medicinales</h3>
+                <p>Descubre los secretos de las plantas locales y sus usos curativos.</p>
+                <div id="contenidoPlantas">
+                    </div>
+            </div>
+            <div id="exposicionBordado">
+                <h3>Símbolos del Bordado Serrano</h3>
+                <p>Aprende sobre la tradición del bordado y las expresiones locales.</p>
+                <div id="contenidoBordado">
+                    </div>
+            </div>
+            <button id="continuarExposiciones">Continuar</button>
+        </section>
+
+        <section id="final" style="display: none;">
+            <h2>¡Felicidades!</h2>
+            <p>Has completado la búsqueda. ¡Visita la Bodega Medieval para el último secreto!</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Creado por <a href="https://www.labodegamedieval.es/reservar/">La Bodega Medieval</a></p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
